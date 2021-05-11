@@ -12,7 +12,8 @@ section .bss
 
 	nome resb 15
 	peso resb 5
-	tn resb 15	
+	tn resb 15
+	tp resb 5	
 
 section .text
 
@@ -29,7 +30,7 @@ _start:
 	int 0x80
 
 	mov eax, 3
-	mov ebx, 0
+	mov ebx, 1
 	mov ecx, nome	
 	mov edx, 15
 	int 0x80
@@ -43,10 +44,12 @@ _start:
 	int 0x80
 
 	mov eax, 3 
-	mov ebx, 0
+	mov ebx, 1
 	mov ecx, peso
 	mov edx, 5
 	int 0x80
+
+	mov [tp], eax
 
 	mov eax, 4
 	mov ebx, 1
@@ -59,12 +62,15 @@ _start:
 	mov ebx, 1
 	mov ecx, msg3
 	mov edx, tam_msg3
+	sub edx, 1
 	int 0x80
+	
 
 	mov eax, 4
 	mov ebx, 1
 	mov ecx, peso
-	mov edx, 5
+	mov edx, [tp]
+	add edx, 2
 	int 0x80
 
 exit:
