@@ -2,6 +2,8 @@ section .data
 	msg1 db "digite o tamanho da base do triangulo: "
 	tam_msg1 equ $ - msg1
 
+	divisao equ 2
+
 	msg2 db "digite o tamanho da altura do triangulo: "
 	tam_msg2 equ $ - msg2
 
@@ -54,15 +56,16 @@ _start:
         mov edx, 2
         int 0x80
 
-        mov eax, [b1]
-        mov ebx, [h1]
-        sub eax, '0'
-        sub ebx, '0'
-        mul ebx
-        add eax, '0'
-        mov [r], eax
+        mov al, [b1]
+        mov bl, [h1]
+        sub al, '0'
+        sub bl, '0'
+	mul bl, 
+        mov bl,	divisao
+	div bl
+	add al, '0'
+	mov [r], al	
         int 0x80
-
 
         mov eax, 4
         mov ebx, 1
@@ -75,7 +78,8 @@ _start:
         mov [ecx], byte 0xa
         mov edx, 1
         int 0x80
-
+	
+	
 
 exit:
 
